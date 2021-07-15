@@ -1,30 +1,31 @@
 const express = require('express');
+const { cb_loggerAccess, timerAccess } = require('./controllers/accessLogControllers');
+const { cb_loggerRegister } = require('./controllers/registerLogControllers');
+const { cb_loggerLogin } = require('./controllers/loginLogControllers');
+const { cb_loggerDashboard } = require('./controllers/dashboardLogControllers');
+const { home } = require('./routes/home');
+const { register } = require('./routes/Register');
+const { login } = require('./routes/login');
+const { dashboard } = require('./routes/dashboard');
+
 const app = express();
 
-// process.env.PORT pour la production // 4000 pour le DEV
-const PORT = process.env.PORT || 4000;
+// ##### Middleware #####
+app.use(timerAccess, cb_loggerAccess); // Log sauvegardé -> "access-log.txt"
+app.use('/users/register', cb_loggerRegister); // Log sauvegardé -> "register-log.txt"
+app.use('/users/login', cb_loggerLogin); // Log sauvegardé -> "login-log.txt"
+app.use('/users/dashboard', cb_loggerDashboard); // Log sauvegardé -> "dashboard-log.txt"
 
-// DOUTE TODOOOOO 
-app.set("view engine", 'react');
+// ##### Routing #####
+app.use('/', home);
+app.use('/users/register', register);
+app.use('/users/login', login);
+app.use('/users/dashboard', dashboard);
 
-// Route vers les pages 
-app.get('/', (req, res) => {
-  res.render('Home')
-});
+// start the server
+const IP = '192.168.1.13' // my local ip on my network
+const PORT = 4000
 
-app.get('/users/register', (req, res) => {
-  res.render('Register')
+app.listen(PORT, IP, () => {
+  console.log(`Server running at http://${IP}:${PORT}`)
 })
-
-app.get('/users/login', (req, res) => {
-  res.render('Login')
-})
-
-app.get('/users/dashboard', (req, res) => {
-  res.render('Dashboard')
-})
-
-
-app.listen(PORT, () => {
-  console.log(`Server running onn port ${PORT}`)
-});
