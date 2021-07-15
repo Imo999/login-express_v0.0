@@ -1,2 +1,8 @@
 node_modules
 .env
+
+## LOG 
+access-log.txt
+login-log.txt
+register-log.txt
+dashboard-log.txt
