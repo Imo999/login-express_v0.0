@@ -3,7 +3,7 @@ import React from 'react'
 const Register = () => {
   return (
     <div>
-      Interface Register
+      <h1>Interface : Register</h1>
     </div>
   )
 }
