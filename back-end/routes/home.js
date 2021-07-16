@@ -6,7 +6,7 @@ const home = express.Router()
 home
   .route('/')
   .get((req, res) => {
-    res.send(`Welcome your are connected at HOME with ip : ${req.ip} `)
+    res.send(`Welcome your are connected at HOME with ip : ${req.ip}`)
   })
   .post((req, res) => {
     res.send("Sorry we don't post requests yet.")
