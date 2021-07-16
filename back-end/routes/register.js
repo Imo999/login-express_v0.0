@@ -1,4 +1,5 @@
 const express = require('express')
+const dbLocal = require('../config/dbLocal')
 
 const register = express.Router()
 
@@ -9,7 +10,10 @@ register
     res.send(`Welcome your are connected at REGISTER with ip : ${req.ip} `)
   })
   .post((req, res) => {
-    res.send("Sorry we don't post requests yet.")
+    let username = req.body.username;
+    let password = req.body.password;
+    dbLocal[username] = password;
+    res.send("Registration success !");
   })
   .put((req, res) => {
     res.send("Sorry we don't post requests yet.")
