@@ -1,7 +1,7 @@
-const db_local = {
+const dbLocal = {
   rcajina: "rcajina",
   bob: "testBob",
   alice: "testAlice"
 };
 
-module.exports = { db_local };
+module.exports = { dbLocal };
